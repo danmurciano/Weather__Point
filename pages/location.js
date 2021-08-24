@@ -97,7 +97,7 @@ export default function Location({ city, region, country, coordinates, latitude,
 }
 
 Location.getInitialProps = async ({ query: { search } }) => {
-  const geoUrl = `https://cors-anywhere.herokuapp.com/http://open.mapquestapi.com/geocoding/v1/address?key=${process.env.MAPQUEST_KEY}&location=${search}&maxResults=1&thumbMaps=true`;
+  const geoUrl = `http://open.mapquestapi.com/geocoding/v1/address?key=${process.env.MAPQUEST_KEY}&location=${search}&maxResults=1&thumbMaps=true`;
   const payload = { headers: { "X-Requested-With": "XMLHttpRequest" } }
   const geoResponse = await axios.get(geoUrl, payload);
   const geoData = geoResponse.data.results[0].locations[0];
@@ -108,7 +108,7 @@ Location.getInitialProps = async ({ query: { search } }) => {
   const longitude = geoData.latLng.lng;
 
 
-  const weatherUrl = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${process.env.WEATHER_KEY}`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${process.env.WEATHER_KEY}`;
   const response2 = await axios.get(weatherUrl, payload);
   const weatherData = response2.data;
   return { city, region, country, latitude, longitude, weatherData };
