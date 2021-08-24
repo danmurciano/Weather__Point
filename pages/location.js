@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Header from "../Components/_App/Header";
-import UnitSelect from "../Components/_App/UnitSelect";
-import Current from "../Components/Location/Current";
-import Daily from "../Components/Location/Daily";
-import Hourly from "../Components/Location/Hourly";
+import Header from "../components/_App/Header";
+import UnitSelect from "../components/_App/UnitSelect";
+import Current from "../components/Location/Current";
+import Daily from "../components/Location/Daily";
+import Hourly from "../components/Location/Hourly";
 import { Icon, Menu } from "semantic-ui-react";
 import { countries } from "../public/countries";
 import weatherResponse from "../utils/weatherResponse";
