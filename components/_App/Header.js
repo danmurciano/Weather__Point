@@ -40,8 +40,7 @@ function Header({ units, setUnits }) {
       return false;
     }
   }
-
-  console.log(smallScreen);
+  
 
   return (
     <div>

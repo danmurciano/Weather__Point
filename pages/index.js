@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Header from "../Components/_App/Header";
-import Footer from "../Components/_App/Footer";
+import Header from "../components/_App/Header";
+import Footer from "../components/_App/Footer";
 import weatherResponse from "../utils/weatherResponse";
 
 
