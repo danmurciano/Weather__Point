@@ -9,7 +9,6 @@ import Hourly from "../components/Location/Hourly";
 import { Icon, Menu } from "semantic-ui-react";
 import { countries } from "../public/countries";
 import weatherResponse from "../utils/weatherResponse";
-import { _ } from "lodash";
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 

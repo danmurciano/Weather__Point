@@ -36,7 +36,7 @@ export default function Favorites() {
 
 
   async function handleSelect(event, value) {
-    router.push(`/location?search=${value}`);
+    router.push(`/location/?search=${value}`);
   }
 
   function saveLocation() {
@@ -81,38 +81,44 @@ export default function Favorites() {
 
   return (
     <div class="row favorites-menu">
-      {page > 0 ? (
-        <div class="arrow-col">
-          <Button className="arrow-button" basic active="false" onClick={() => scrollPage(event, -1)} >
-            <Icon className="carousel-arrow" name="chevron left" size="big" />
-          </Button>
-        </div>
-      ) : (
-        <div class="arrow-col">
-          <Button className="arrow-button-disabled" basic active="false" >
-            <Icon className="carousel-arrow" name="chevron left" size="big" />
-          </Button>
-        </div>
-      )}
+      {locations.length > 0 ? (
+        <>
+        {page > 0 ? (
+          <div class="arrow-col">
+            <Button className="arrow-button" basic active="false" onClick={() => scrollPage(event, -1)} >
+              <Icon className="carousel-arrow" name="chevron left" size="big" />
+            </Button>
+          </div>
+        ) : (
+          <div class="arrow-col">
+            <Button className="arrow-button-disabled" basic active="false" >
+              <Icon className="carousel-arrow" name="chevron left" size="big" />
+            </Button>
+          </div>
+        )}
 
-      <div class="favorites-locations">
-        <Menu pagination inverted className="">
-          {mapFavorites(locations)}
-        </Menu>
-      </div>
+        <div class="favorites-locations">
+          <Menu pagination inverted className="">
+            {mapFavorites(locations)}
+          </Menu>
+        </div>
 
-      {page < length - 4 ? (
-        <div class="arrow-col">
-          <Button className="arrow-button" basic active="false" onClick={() => scrollPage(event, 1)} >
-            <Icon className="carousel-arrow" name="chevron right" size="big" />
-          </Button>
-        </div>
+        {page < length - 4 ? (
+          <div class="arrow-col">
+            <Button className="arrow-button" basic active="false" onClick={() => scrollPage(event, 1)} >
+              <Icon className="carousel-arrow" name="chevron right" size="big" />
+            </Button>
+          </div>
+        ) : (
+          <div class="arrow-col">
+            <Button className="arrow-button-disabled" basic active="false" >
+              <Icon className="carousel-arrow" name="chevron right" size="big" />
+            </Button>
+          </div>
+        )}
+        </>
       ) : (
-        <div class="arrow-col">
-          <Button className="arrow-button-disabled" basic active="false" >
-            <Icon className="carousel-arrow" name="chevron right" size="big" />
-          </Button>
-        </div>
+        <> </>
       )}
 
 

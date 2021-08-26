@@ -36,7 +36,7 @@ export default function FavoritesSmall() {
 
 
   async function handleSelect(event, value) {
-    router.push(`/location?search=${value}`);
+    router.push(`/location/?search=${value}`);
   }
 
   function saveLocation() {
@@ -81,6 +81,8 @@ export default function FavoritesSmall() {
 
   return (
     <div class="row favorites-menu">
+      {locations.length > 0 ? (
+      <>
       {page > 0 ? (
         <div class="arrow-col">
           <Button size="mini" className="arrow-button" basic active="false" onClick={() => scrollPage(event, -1)} >
@@ -114,6 +116,10 @@ export default function FavoritesSmall() {
           </Button>
         </div>
       )}
+      </>
+    ) : (
+      <> </>
+    )}
 
 
       {currentLocation ? (

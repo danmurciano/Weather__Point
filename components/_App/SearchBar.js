@@ -51,13 +51,13 @@ export default function SearchBar4() {
 
   async function handleSubmit(event) {
     if (inputValue.length > 1) {
-      router.push(`/location?search=${inputValue}`);
+      router.push(`/location/?search=${inputValue}`);
       setInputValue("");
     }
   }
 
   async function handleSelect(event, newValue) {
-    router.push(`/location?search=${newValue}`);
+    router.push(`/location/?search=${newValue}`);
     setInputValue("");
   }
 
