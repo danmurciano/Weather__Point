@@ -121,11 +121,11 @@ h2 {
 }
 
 
-.ui.form .field.field input:-webkit-autofill {
+.ui.form .field.field .MuiOutlinedInput-root input:-webkit-autofill {
   border-color: white !important;
 }
 
-.ui.form .field.field input:-webkit-autofill:focus {
+.ui.form .field.field .MuiOutlinedInput-root input:-webkit-autofill:focus {
   border-color: white !important;
 }
 
@@ -223,7 +223,7 @@ legend {
   color: white !important;
   border-radius: 24px !important;
   font-weight: 400 !important;
-  margin: auto 12px !important;
+  margin: 12px !important;
 }
 
 .save-button:hover {
