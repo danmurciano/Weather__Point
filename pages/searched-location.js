@@ -95,7 +95,7 @@ export default function SearchedLocation({ city, region, country, latitude, long
 }
 
 SearchedLocation.getInitialProps = async ({ query: { search } }) => {
-  const geoUrl = `https://open.mapquestapi.com/geocoding/v1/address?key=${process.env.MAPQUEST_KEY}&location=${search}&maxResults=1&thumbMaps=true`;
+  const geoUrl = `https://open.mapquestapi.com/geocoding/v1/address?key=jSNsxG2R1gZVxGcNiVs3YB53STD5yrU3&location=${search}&maxResults=1&thumbMaps=true`;
   const payload = { headers: { "X-Requested-With": "XMLHttpRequest" } };
   const geoResponse = await axios.get(geoUrl, payload);
   const geoData = geoResponse.data.results[0].locations[0];
@@ -105,7 +105,7 @@ SearchedLocation.getInitialProps = async ({ query: { search } }) => {
   const latitude = geoData.latLng.lat;
   const longitude = geoData.latLng.lng;
 
-  const weatherUrl = `https://dans-proxy.herokuapp.com/https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${process.env.WEATHER_KEY}`;
+  const weatherUrl = `https://dans-proxy.herokuapp.com/https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=a27a7e6cb45357aa26387fcbdf4621cd`;
   const weatherResponse = await axios.get(weatherUrl, payload);
   const weatherData = weatherResponse.data;
   return { city, region, country, latitude, longitude, weatherData };
