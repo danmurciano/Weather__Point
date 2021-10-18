@@ -40,7 +40,7 @@ function Header({ units, setUnits }) {
       return false;
     }
   }
-  
+
 
   return (
     <div>
@@ -58,7 +58,7 @@ function Header({ units, setUnits }) {
             </div>
           </div>
 
-          {router.pathname.startsWith("/location") ? (
+          {router.pathname.startsWith("/location") || router.pathname.startsWith("/searched-location") ? (
             <div class="col">
               <div>
                 <UnitSelectSmall units={units} setUnits={setUnits} />
@@ -84,7 +84,7 @@ function Header({ units, setUnits }) {
             </div>
           </div>
 
-          {router.pathname.startsWith("/location") ? (
+          {router.pathname.startsWith("/location") || router.pathname.startsWith("/searched-location") ? (
             <div class="col-xl col-lg col-md col-sm">
               <div>
                 <UnitSelect units={units} setUnits={setUnits} />

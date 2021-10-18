@@ -121,12 +121,8 @@ h2 {
 }
 
 
-.ui.form .field.field .MuiOutlinedInput-root input:-webkit-autofill {
-  border-color: white !important;
-}
-
-.ui.form .field.field .MuiOutlinedInput-root input:-webkit-autofill:focus {
-  border-color: white !important;
+.jss2 {
+  border-style: none !important;
 }
 
 .PrivateNotchedOutline-root-2 {

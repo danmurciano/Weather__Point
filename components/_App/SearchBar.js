@@ -26,9 +26,8 @@ const useStyles = makeStyles({
 
 
 
-export default function SearchBar4() {
+export default function SearchBar() {
   const classes = useStyles();
-  const [value, setValue] = React.useState("");
   const [inputValue, setInputValue] = React.useState("");
 
   const router = useRouter();
@@ -39,59 +38,76 @@ export default function SearchBar4() {
     matchFrom: 'start'
   });
 
-  function handleChange(event) {
-    setInputValue(event.target.value);
-    setValue(event.target.value);
-  }
 
   function handleClearSearch(event) {
     setInputValue("");
-    setValue("");
   }
 
-  async function handleSubmit(event) {
+
+  async function handleSearch(event) {
     if (inputValue.length > 1) {
       router.push(`/location/?search=${inputValue}`);
       setInputValue("");
     }
   }
 
+
   async function handleSelect(event, newValue) {
-    router.push(`/location/?search=${newValue}`);
-    setInputValue("");
+    if (newValue) {
+      if (typeof(newValue) === "string") {
+        console.log(newValue);
+        router.push(`/searched-location/?search=${inputValue}`);
+      } else if (typeof(newValue) === "object") {
+        let selectedLocation = Object.values(newValue)
+        selectedLocation.join();
+        router.push(`/location/?search=${selectedLocation}`);
+      }
+      setInputValue("");
+    }
   }
 
+  function getLocationLabel(location) {
+    if (location.region !== "" && location.region !== location.city) {
+      return location.city + ", " + location.region + ", " + location.country;
+    } else {
+      return location.city + ", " + location.country;
+    }
+  }
 
 
   return (
     <div class="row search-bar">
       <Autocomplete
-        value={value}
         onChange={(event, newValue) => {handleSelect(event, newValue)}}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {setInputValue(newInputValue)}}
         id="controllable-states-demo"
-        options={inputValue.length < 3 ? [] : options.map(option => option.city + ", " + option.region + ", " + option.country)}
+        options={inputValue.length < 3 ? [] : options}
+        getOptionLabel={inputValue.length < 3 ? option => "" : option => getLocationLabel(option)}
         style={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Search City or Zip Code" variant="outlined" />}
         filterOptions={filterOptions}
         size="small"
         freeSolo
       />
-      <Button
-        size="small"
-        className={inputValue.length > 0 ? "searchBarButton" : "hidden-button"}
-        type="clear"
-        icon="delete"
-        onClick={handleClearSearch}
-      />
-      <Button
-        size="small"
-        className="searchBarButton"
-        type="submit"
-        icon="search"
-        onClick={handleSubmit}
-      />
+
+      {inputValue.length > 0 ? (
+        <Button
+          size="small"
+          className={inputValue.length > 0 ? "searchBarButton" : "hidden-button"}
+          type="clear"
+          icon="delete"
+          onClick={handleClearSearch}
+        />
+      ) : (
+        <Button
+          size="small"
+          className="searchBarButton"
+          type="submit"
+          icon="search"
+          onClick={handleSearch}
+        />
+      )}
     </div>
   );
 }

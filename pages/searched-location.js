@@ -12,13 +12,16 @@ import weatherResponse from "../utils/weatherResponse";
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 
-export default function Location({ city, region, country, latitude, longitude, weatherData, units }) {
+export default function SearchedLocation({ city, region, country, latitude, longitude, weatherData, units }) {
   let cookies = parseCookies();
   const [unitsState, setUnitsState] = React.useState(units);
 
   const weather = weatherResponse(weatherData);
   const router = useRouter();
 
+
+  const i = countries.findIndex(el => el.code === country);
+  country = countries[i].name;
 
   const locationInfo = city + "," + region + "," + country + "," + latitude + "," + longitude;
 
@@ -91,15 +94,17 @@ export default function Location({ city, region, country, latitude, longitude, w
   );
 }
 
-Location.getInitialProps = async ({ query: { search } }) => {
-  let l = search.split(",");
-  const city = l[0];
-  const region = l[1];
-  const country = l[2];
-  const latitude = l[3];
-  const longitude = l[4];
-
+SearchedLocation.getInitialProps = async ({ query: { search } }) => {
+  const geoUrl = `https://open.mapquestapi.com/geocoding/v1/address?key=${process.env.MAPQUEST_KEY}&location=${search}&maxResults=1&thumbMaps=true`;
   const payload = { headers: { "X-Requested-With": "XMLHttpRequest" } };
+  const geoResponse = await axios.get(geoUrl, payload);
+  const geoData = geoResponse.data.results[0].locations[0];
+  const city = geoData.adminArea5;
+  const region = geoData.adminArea3;
+  const country = geoData.adminArea1;
+  const latitude = geoData.latLng.lat;
+  const longitude = geoData.latLng.lng;
+
   const weatherUrl = `https://dans-proxy.herokuapp.com/https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${process.env.WEATHER_KEY}`;
   const weatherResponse = await axios.get(weatherUrl, payload);
   const weatherData = weatherResponse.data;

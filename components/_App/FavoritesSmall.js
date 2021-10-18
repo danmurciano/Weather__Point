@@ -5,7 +5,6 @@ import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 
 export default function FavoritesSmall() {
-  const [activeItem, setActiveItem] = React.useState("London");
   const [page, setPage] = React.useState(0);
   const router = useRouter();
   const cookies = parseCookies();
@@ -25,10 +24,18 @@ export default function FavoritesSmall() {
     }
   }
 
+  function getLocationName(location) {
+    location = location.split(",");
+    if (location[1] !== "" && location[1] !== location[0]) {
+      return location[0] + " | " + location[1] + ", "  + location[2];
+    } else {
+      return location[0] + " | " + location[2];
+    }
+  }
 
 // Extends favorites cookies for 1 year everytime this element loads
   locations.map(location => (
-    setCookie(null, location, location, {
+    setCookie(null, getLocationName(location), location, {
       maxAge: 365 * 24 * 3600,
       path: '/',
     })
@@ -39,16 +46,19 @@ export default function FavoritesSmall() {
     router.push(`/location/?search=${value}`);
   }
 
-  function saveLocation() {
-    setCookie(null, currentLocation, currentLocation, {
+
+  function saveLocation(event, value) {
+    const locationName = getLocationName(value);
+    setCookie(null, locationName, value, {
       maxAge: 365 * 24 * 3600,
       path: '/',
     })
     router.reload();
   }
 
+
   function removeLocation(event, value) {
-    destroyCookie(null, value);
+    destroyCookie(null, getLocationName(value));
     router.reload();
   }
 
@@ -65,11 +75,11 @@ export default function FavoritesSmall() {
     }
 
     return locations.map(location => (
-      <Menu.Item className="favorites-menu-item-small" active={activeItem === location}>
+      <Menu.Item className="favorites-menu-item-small">
         <Icon name="map marker" color="teal"/>
-        <Button className="favorites-menu-button" onClick={() => handleSelect(event, location.replace("|", ", "))}>
-          <p className="favorites-city">{location.split("|")[0]} </p>
-          <p className="favorites-regionAndCountry">{location.split("|")[1]} </p>
+        <Button className="favorites-menu-button" onClick={() => handleSelect(event, location)}>
+          <p className="favorites-city">{location.split(",")[0]} </p>
+          <p className="favorites-regionAndCountry"> {getLocationName(location).split(" | ")[1]} </p>
         </Button>
         <Button size="mini" className="remove-button" onClick={() => removeLocation(event, location)}>
           <Icon name="trash alternate"/>
@@ -122,8 +132,8 @@ export default function FavoritesSmall() {
     )}
 
 
-      {currentLocation ? (
-        <Button size="mini" className="save-button" onClick={() => saveLocation(event, location)}>
+      {router.pathname.startsWith("/location") || router.pathname.startsWith("/searched-location") ? (
+        <Button className="save-button" onClick={() => saveLocation(event, currentLocation)}>
           Save Current
         </Button>
       ) : (

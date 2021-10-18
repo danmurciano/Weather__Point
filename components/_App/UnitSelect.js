@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from "next/router";
-import { Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react';
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 
@@ -19,9 +19,6 @@ export default function UnitSelect({ units, setUnits }) {
       path: '/',
     })
   }
-
-  console.log(units, unitsState);
-
 
   return (
     <div className="units-div">
