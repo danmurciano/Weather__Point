@@ -6,17 +6,20 @@
     display: none;
 }
 
-
 .screen-adjust {
   min-width: 500px;
   min-height: 100vh;
+}
+
+.page-index {
+  min-height: 100vh;
+  background-color: #0c0d0d;
 }
 
 .page-main {
   min-height: 100vh;
   background-color: #202324;
 }
-
 
 .title-bar {
   text-align: center;
