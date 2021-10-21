@@ -30,15 +30,15 @@ it proceeds the same to OpenWeatherMap, and pulls weather data.
 Raw weather data is being processed by a specifically created function, that returns the data in a human readable form that is displayed on the page.
 A toggle button allows the user to select between imperial and metric display of weather data.
 
-          <p> A user can also save previously visited locations, so they would appear at the dedicated "Favorites" bar, and be easily accessible.
-          These locations are saved to the user’s browser as cookies. When a location is being visited, a cookie named “currentLocation”,
-          that holds the location info is created. Every time a new location is visited, it’s value is being replaced by that of the new location.
-          When a user selects the “Save Current” button, a new cookie with the location’s name is created,
-          and is assigned the value of the “currentLocation” cookie. This cookie will be good for a period of one year,
-          with every visit to the app restarting the count, so a user is reasonably likely to keep his saved locations intact,
-          so long he keeps using the app occasionally on the same browser. </p>
+A user can also save previously visited locations, so they would appear at the dedicated "Favorites" bar, and be easily accessible.
+These locations are saved to the user’s browser as cookies. When a location is being visited, a cookie named “currentLocation”,
+that holds the location info is created. Every time a new location is visited, it’s value is being replaced by that of the new location.
+When a user selects the “Save Current” button, a new cookie with the location’s name is created,
+and is assigned the value of the “currentLocation” cookie. This cookie will be good for a period of one year,
+with every visit to the app restarting the count, so a user is reasonably likely to keep his saved locations intact,
+so long he keeps using the app occasionally on the same browser.
 
-          <p> As a side note, opening multiple tabs of the app with multiple locations could potentially mess up the process
-          of saving a location, as there’s only one “currentLocation” cookie, and its value always updates to the
-          most recently loaded location, meaning that an open tab of a previously loaded location will not save the location correctly,
-          once another tab has been loaded on a different tab. </p>
+As a side note, opening multiple tabs of the app with multiple locations could potentially mess up the process
+of saving a location, as there’s only one “currentLocation” cookie, and its value always updates to the
+most recently loaded location, meaning that an open tab of a previously loaded location will not save the location correctly,
+once another tab has been loaded on a different tab.
